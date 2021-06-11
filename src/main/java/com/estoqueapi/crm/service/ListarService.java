@@ -10,6 +10,7 @@ import com.estoqueapi.crm.entity.Categoria;
 import com.estoqueapi.crm.entity.Fornecedor;
 import com.estoqueapi.crm.entity.Produto;
 import com.estoqueapi.crm.model.CategoriaLista;
+import com.estoqueapi.crm.model.ProdutoEmFalta;
 import com.estoqueapi.crm.repository.CategoriaRepository;
 import com.estoqueapi.crm.repository.FornecedorRepository;
 import com.estoqueapi.crm.repository.ProdutoRepository;
@@ -26,15 +27,17 @@ public class ListarService {
 	@Autowired
 	private FornecedorRepository fornecedorRepository;
 	
-	public List<String> produtosEmFalta(){
+	public List<ProdutoEmFalta> produtosEmFalta(){
 		List<Produto> produtos = produtoRepository.findByQuantidade(0);
-		List<String> nomes = new ArrayList<>();
+		List<ProdutoEmFalta> nomes = new ArrayList<>();
+		
 		
 		int i = 0;
 		while(i < produtos.size()) {
 			
-			nomes.add(produtos.get(i).getNome());
-			System.out.println(nomes.get(i));
+			String nome = produtos.get(i).getNome();
+			ProdutoEmFalta produto = new ProdutoEmFalta(nome);
+			nomes.add(produto);
 			
 			i++;
 		}

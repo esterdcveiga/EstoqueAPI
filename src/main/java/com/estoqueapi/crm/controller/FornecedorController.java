@@ -24,8 +24,12 @@ public class FornecedorController {
 	private ListarService listarService;
 	
 	@GetMapping
-	public List<String> listarProduto() {
-		//return fornecedorRepository.findAll();
+	public List<Fornecedor> listarProduto() {
+		return fornecedorRepository.findAll(); 
+	}
+	
+	@GetMapping("falta")
+	public List<String> listarFornecedoresEmFalta() {
 		return listarService.fornecedoresEmFalta();
 	}
 	

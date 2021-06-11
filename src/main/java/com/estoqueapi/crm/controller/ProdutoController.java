@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoqueapi.crm.entity.Produto;
+import com.estoqueapi.crm.model.ProdutoEmFalta;
 import com.estoqueapi.crm.repository.ProdutoRepository;
 import com.estoqueapi.crm.service.ListarService;
 
@@ -26,12 +27,7 @@ public class ProdutoController {
 	
 	@GetMapping
 	public List<Produto> listarProduto() {
-		//return produtoRepository.findAll();
-		//return produtoRepository.findByQuantidade(8);
-		
-		//return listarService.produtosEmFalta();
-		
-		return produtoRepository.findByCategoriaId(2);
+		return produtoRepository.findAll();		
 	}
 	
 	@PostMapping
@@ -39,9 +35,8 @@ public class ProdutoController {
 		return produtoRepository.save(produto);
 	}
 	
-	//@PutMapping
-	//public Produto atualizarProduto(long id, long quantidade, double valor) {
-		//return produtoRepository.saveAndFlush(produto);
-	//}
-
+	@GetMapping("/falta")
+	public List<ProdutoEmFalta> lsitarProdutosEmFalta(){
+		return listarService.produtosEmFalta();
+	}
 }
